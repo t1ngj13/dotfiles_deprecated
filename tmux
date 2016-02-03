@@ -79,7 +79,7 @@ set-option -g status-interval 5
 set-option -g status-left-length 30
 set-option -g visual-activity on
 
-source-file $HOME/dotfiles/airline.tmux
+source-file $HOME/.tmux/airline.tmux
 
 ############################################################################
 # Unbindings

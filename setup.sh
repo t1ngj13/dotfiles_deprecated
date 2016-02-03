@@ -14,11 +14,11 @@ function install() {
       return
     fi;
 
-    if [ ! -f `which $APP` ]; then
+    if hash $APP 2>/dev/null; then
+      echo "Skip installing $APP as it is already there"
+    else
       echo "Install $APP"
       sudo apt-get install $APP
-    else
-      echo "Skip installing $APP as it is already there"
     fi;
 }
 
@@ -28,7 +28,7 @@ do
 done;
 
 echo "Install on-my-zsh"
-if [ `basename $ZSH` != ".oh-my-zsh" ]; then
+if [[ -z "$ZSH"  ]] || [ `basename $ZSH` != ".oh-my-zsh" ]; then
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 fi;
 
@@ -64,8 +64,16 @@ fi;
 
 if [ ! -f $HOME/.tmux.conf ]; then
   echo "Set up tmux"
-  ln -s $DIR/tmux ~/.tmux.conf
+  ln -s $DIR/tmux $HOME/.tmux.conf
 else
   echo "~/.tmux.conf already exists. Skipping ... "
+fi;
+
+if [ ! -f $HOME/.tmux/.tmux ]; then
+  echo "Set up airline.tmux"
+  mkdir -p $HOME/.tmux
+  ln -s $DIR/airline.tmux $HOME/.tmux/airline.tmux
+else
+  echo "~/.tmux/airline..tmux already exists. Skipping ... "
 fi;
 

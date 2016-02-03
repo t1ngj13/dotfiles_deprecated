@@ -1,5 +1,5 @@
 ZSH_THEME="agnoster"
-plugins=(git autojump)
+plugins=(git autojump vi-mode)
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
 export EDITOR="vi"
 
